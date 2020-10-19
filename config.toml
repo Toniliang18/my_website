@@ -32,7 +32,7 @@ disqusShortname = ""
 
   # 404 error customization
   [params.error404]
-    heading = "Page couldn't be found"
+    heading = "Woops...Wrong Page"
     text = "Please visit [this page](/)"
 
   # Navigation Section
@@ -44,20 +44,16 @@ disqusShortname = ""
     # logo = "logo.png"
 
     [[params.navigation.links]]
-      name = "Home"
-      url = "#"
+      name = "My Project"
+      url = "https://toniliang.netlify.app/"
 
     [[params.navigation.links]]
-      name = "CV"
-      url = "blogs"
+      name = "Biography"
+      url = "blogs/session6-workshop3/blog12"
 
-    [[params.navigation.links]]
-      name = "Data"
-      url = "blogs/ipsum"
-
-    [[params.navigation.links]]
-      name = "#"
-      url = "elements.html"
+    #[[params.navigation.links]]
+      #name = "#"
+      #url = "elements.html"
 
     # Add custom links here by uncommenting code below. To remove links just delete
     # the [[params.navigation.links]] map associated with that link. Copy and paste
@@ -69,12 +65,12 @@ disqusShortname = ""
     # Button Style 1
     [[params.navigation.button1]]
       name = "Get Started"
-      url = "blogs"
+      url = "https://toniliang.netlify.app/"
 
     # Button Style 2
-    [[params.navigation.button2]]
-      name = "Log In"
-      url = "#"
+   # [[params.navigation.button2]]
+     # name = "Log In"
+      #url = "#"
 
 
   # Banner section
@@ -91,6 +87,12 @@ disqusShortname = ""
     enable = true
     # Display your showcases here.
     
+    [[params.tiles.showcase]]
+      title = "Biography"
+      subtitle = "A bit more about me"
+      image = "pic11.jpg"
+      url = "blogs/session6-workshop3/blog12"
+      
     [[params.tiles.showcase]]
       title = "Global Warming"
       subtitle = "Temperature Anomalies"
@@ -111,15 +113,9 @@ disqusShortname = ""
 
     [[params.tiles.showcase]]
       title = "Youth Risk Behavior Surveillance"
-     # subtitle = "#"
+      subtitle = "Keeping an Eye on Teens Health!"
       image = "pic04.jpg"
       url = "blogs/session6-workshop3/blog6"
-
-    [[params.tiles.showcase]]
-      title = "IMDB Rating Analysis"
-     # subtitle = "Ipsum Dolor Sit Amet"
-      image = "pic05.jpg"
-      url = "blogs/session6-workshop3/blog7"
 
     [[params.tiles.showcase]]
       title = "Pay Discrimination"
@@ -138,14 +134,15 @@ disqusShortname = ""
   # Section Type Two
   [params.two]
     enable = true
-    title = "Massa libero"
-    subtitle = """Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. 
-    Mauris aliquet magna magna sed nunc rhoncus pharetra. 
-    Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. 
-    Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero.
-    Mauris aliquet magna magna sed nunc rhoncus amet pharetra et feugiat tempus."""
-    buttonText = "Get Started"
-    url = "blogs"
+    title = "My Favorite Animal - Fat Bear!"
+    subtitle = """Learn about the Fat Bear Week. 
+    Fat Bear Week is an annual tournament celebrating the success of the bears at 
+    Brooks River in Katmai National Park. From September 30 to October 6, 
+    your vote decides who is the fattest bear. Match-ups are posted at 12 pm 
+    Eastern (8 am Alaska) each day. Voters will have a chance to vote on each match-up
+    until 10 pm Eastern (6 pm Alaska)."""
+    buttonText = "Choose the fattest bear of the year!"
+    url = "https://explore.org/fat-bear-week"
 
 
   # Contact section
@@ -175,8 +172,8 @@ disqusShortname = ""
     email = "Xiaotongl.mfa2021@london.edu"
 
     [[params.contact.phone]]
-    title = "#"
-    phone = "#"
+    title = "Phone"
+    phone = "020 7000 7000"
 
     [[params.contact.address]]
     title = "Address"
@@ -187,32 +184,16 @@ disqusShortname = ""
   # Footer section
   [params.footer]
     enable = true
-    copyright = "Company Name"
-
-    # Uses font awesome icons
-    [[params.footer.social]]
-      icon = "fa-twitter"
-      url= "https://www.twitter.com"
-      label = "Twitter"
-
-    [[params.footer.social]]
-      icon = "fa-facebook"
-      url= "https://www.facebook.com"
-      label = "Facebook"
-
-    [[params.footer.social]]
-      icon = "fa-instagram"
-      url= "https://www.instagram.com"
-      label = "Instagram"
+    copyright = "Toni Liang"
     
     [[params.footer.social]]
       icon = "fa-github"
-      url= "https://www.github.com"
+      url= "https://github.com/Toniliang18"
       label = "GitHub"
 
     [[params.footer.social]]
       icon = "fa-linkedin"
-      url= "https://www.linkedin.com"
+      url= "https://www.linkedin.com/in/toniliang/"
       label = "LinkedIn"
 
     [[params.footer.quicklinks]]

@@ -1,0 +1,32 @@
+---
+title: 'Hey this is me ;)'
+author: "Toni Liang"
+date: "13/09/2020"
+output:
+  html_document:
+    highlight: zenburn
+    theme: flatly
+    toc: yes
+    toc_float: yes
+  word_document:
+    toc: yes
+---
+
+
+```{r load-libraries, warning=FALSE, message=FALSE, echo=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(gapminder)  # gapminder dataset
+library(here)
+```
+
+# Toni's Biography
+
+
+## Who I am
+My name is Toni Liang. I am originally from China, finished my undergraduate studies at the LSE, worked for 1 year in IBD prior to joining LBS, focusing in onshore and offshore bond origination.
+
+## What I like
+- Animals!
+- Backpacking
+- Scuba diving
+- Surfing
