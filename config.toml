@@ -38,7 +38,7 @@ disqusShortname = ""
   # Navigation Section
   [params.navigation]
     title = "Toni"
-    subtitle = "patterns"
+   # subtitle = "patterns"
     menu = "Menu"
     # Optional logo as brand stored in img/
     # logo = "logo.png"
@@ -92,40 +92,40 @@ disqusShortname = ""
     # Display your showcases here.
     
     [[params.tiles.showcase]]
-      title = "Youth Risk Behavior Surveillance"
-      subtitle = "#"
+      title = "Global Warming"
+      subtitle = "Temperature Anomalies"
       image = "pic01.jpg"
-      url = "blogs/YRBS"
+      url = "blogs/session6-workshop3/blog11"
 
     [[params.tiles.showcase]]
-      title = "The 2020 Election"
-      subtitle = "#"
+      title = "Drinks and Hometown"
+      subtitle = "You are what you drink!"
       image = "pic02.jpg"
-      url = "blogs/Election"
+      url = "blogs/session6-workshop3/blog10"
 
     [[params.tiles.showcase]]
-      title = "GDP Analysis"
-      subtitle = "#"
+      title = "Recession and the Rates"
+      subtitle = "Upward or Downward?"
       image = "pic03.jpg"
-      url = "blogs/GDP"
+      url = "blogs/session6-workshop3/blog9"
 
     [[params.tiles.showcase]]
-      title = "IMDB Ratings Analysis"
-      subtitle = "#"
+      title = "Youth Risk Behavior Surveillance"
+     # subtitle = "#"
       image = "pic04.jpg"
-      url = "blogs/IMDB"
+      url = "blogs/session6-workshop3/blog6"
 
     [[params.tiles.showcase]]
-      title = "Climate change"
-      subtitle = "Ipsum Dolor Sit Amet"
+      title = "IMDB Rating Analysis"
+     # subtitle = "Ipsum Dolor Sit Amet"
       image = "pic05.jpg"
-      url = "blogs/Climate"
+      url = "blogs/session6-workshop3/blog7"
 
     [[params.tiles.showcase]]
-      title = "Drinking Habits around the world"
-      subtitle = "Feugiat Amet Tempus"
+      title = "Pay Discrimination"
+     # subtitle = "Feugiat Amet Tempus"
       image = "pic06.jpg"
-      url = "blogs/Drinking"
+      url = "blogs/session6-workshop3/blog8"
     # You can make more showcases by copy and pasting the code above
 
   [params.blog]

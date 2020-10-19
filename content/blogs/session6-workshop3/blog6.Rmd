@@ -1,0 +1,238 @@
+---
+title: "Youth Risk Behavior Surveillance"
+author: "LBS MFA2021 Group 2A"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    theme: flatly
+    highlight: zenburn
+    number_sections: yes
+    toc: yes
+    toc_float: yes
+    code_folding: show
+---
+
+
+```{r, setup, echo=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+```
+
+
+```{r load-libraries, echo=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(GGally)
+library(readxl)
+library(here)
+library(skimr)
+library(janitor)
+library(broom)
+library(tidyquant)
+library(infer)
+library(openintro)
+library(tidyquant)
+```
+
+
+# Youth Risk Behavior Surveillance
+
+Every two years, the Centers for Disease Control and Prevention conduct the [Youth Risk Behavior Surveillance System (YRBSS)](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm) survey, where it takes data from high schoolers (9th through 12th grade), to analyze health patterns. 
+
+
+```{r}
+data(yrbss)
+glimpse(yrbss)
+```
+
+```{r}
+skim(yrbss)
+
+```
+## Exploratory Data Analysis
+
+We will first start with analyzing the `weight` of participants in kilograms. Using visualization and summary statistics, to describe the distribution of weights.
+
+```{r, eda_on_weight}
+
+summary(yrbss$weight)
+glimpse(yrbss)
+
+yrbss %>% filter((!is.na(weight))) %>%
+  ggplot(aes(x=weight))+
+  geom_histogram()+
+  facet_grid(race~gender)+
+  labs(title="Distribution of weights by kg within high school students", x="Weight (Kg)", y="Students (n)")+
+  theme_bw()
+
+```
+
+Based on the table, we are missing 1004 values.
+
+The distribution of weight between male and female is very similar for each category.The majority of all students have a weight range between 50 and 75kg.It also worth noticing that the number of "White" students is much higher than any other category.
+
+
+Next, we consider the possible relationship between a high schooler’s weight and their physical activity. Plotting the data is a useful first step because it helps us quickly visualize trends, identify strong associations, and develop research questions.
+
+```{r}
+
+Weight_Activity_Relation<- yrbss %>%
+  select(weight,physically_active_7d) %>%
+  group_by(physically_active_7d) %>%
+  na.omit() %>%
+  summarize(AvgWeight=mean(weight))
+  
+Weight_Activity_Relation %>%
+  ggplot(aes(x=physically_active_7d,y=AvgWeight)) +
+  geom_point() +
+  geom_smooth() +
+  labs(title ="Relationship between workout and average weight",subtitle = "9th-12th grade students",   x= "Number of days physically active per week", y="Average Weight")+
+  theme_bw()
+
+```
+
+There is definitely a relationship between the average weight and the number of workout days (per week) for the 9th-12th grade students. The graph shows that the weight (kg) tends to increase with the number of days physically active. The curve increases between 0 and 4 days of workout, showing a strong correlation between the 2 variables, and it slightly decreases between 4 and 5 days, but the increase pursues after day 6.
+
+
+Let’s create a new variable `physical_3plus`, which will be `yes` if they are physically active for at least 3 days a week, and `no` otherwise.
+
+  
+```{r}
+yrbss <- yrbss %>% 
+  mutate(physical_3plus = ifelse(physically_active_7d >= 3, "yes", "no"))
+
+yrbss %>% filter(!is.na(physical_3plus)) %>% 
+  group_by(physical_3plus) %>% 
+  summarise(count = n()) %>% 
+  mutate(prop= count/sum(count))
+
+```
+
+
+```{r, boxplot}
+
+Not_active <- yrbss %>% 
+        filter(physical_3plus=="no") %>% 
+        summarise(count = n())
+
+Total_Count <- yrbss %>% 
+        select(physical_3plus)%>%
+        summarise(count = n())
+
+prop.test(sum(Not_active),sum(Total_Count ))
+
+yrbss %>%
+        na.omit() %>%
+        ggplot(aes(x=physical_3plus,y=weight))+
+        geom_boxplot()+
+        labs(title="Activity vs Weight",
+             x="Active more than 3 days per week", y="Weight")
+
+
+```
+
+The graph shows 2 sets of population: people who are not active more than 3 days per week ("no") and people who are active more than 3 days per week ("yes"). Comparing the 2 sets, we can assume that the characteristics are very similar with slight differences. The median, the 25th percentile and 75th percentile of "yes" population are higher than "no" population. The similarities for the 2 sets question the relationship between weight and activity. We would have expected "yes" population to have the median, the 25th percentile and 75th percentile much higher than "no" population. 
+
+
+## Confidence Interval
+
+Boxplots show how the medians of the two distributions compare, but we can also compare the means of the distributions using either a confidence interval or a hypothesis test. Note that when we calculate the mean/SD, etc weight in these groups using the mean function, we must ignore any missing values by setting the `na.rm = TRUE`.
+
+
+```{r}
+yrbss %>%
+  group_by(physical_3plus) %>%
+  filter(!is.na(physical_3plus)) %>% 
+  summarise(mean_weight = mean(weight, na.rm = TRUE),
+            sd_weight = sd(weight, na.rm=TRUE),
+            count = n(),
+            se_weight = sd_weight/sqrt(count),
+            t_critical = qt(0.975, count-1), 
+            margin_of_error = t_critical * se_weight,
+            lower = mean_weight - t_critical * se_weight,
+            upper = mean_weight + t_critical * se_weight
+            )
+
+```
+
+There is an observed difference of about 1.77kg (68.44 - 66.67), and we notice that the two confidence intervals do not overlap. It seems that the difference is at least 95% statistically significant. Let us also conduct a hypothesis test.
+
+## Hypothesis test with formula
+
+Write the null and alternative hypotheses for testing whether mean weights are different for those who exercise at least times a week and those who don’t.
+
+```{r}
+t.test(weight ~ physical_3plus, data = yrbss)
+```
+
+
+
+## Hypothesis test with `infer`
+
+
+Next, we will introduce a new function, `hypothesize`, that falls into the infer workflow. we will use this method for conducting hypothesis tests.
+
+But first, we need to initialize the test, which we will save as `obs_diff`.
+
+```{r}
+obs_diff <- yrbss %>%
+  specify(weight ~ physical_3plus) %>%
+  calculate(stat = "diff in means", order = c("yes", "no"))
+
+```
+
+After we have initialized the test, we need to simulate the test on the null distribution, which we will save as null.
+
+
+```{r}
+null_dist <- yrbss %>%
+  specify(weight ~ physical_3plus) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%
+  calculate(stat = "diff in means", order = c("yes", "no"))
+
+```
+
+Here, `hypothesize` is used to set the null hypothesis as a test for independence, i.e., that there is no difference between the two population means. In one sample cases, the null argument can be set to *point* to test a hypothesis relative to a point estimate. 
+
+Also, note that the `type` argument within generate is set to permute, which is the argument when generating a null distribution for a hypothesis test.
+
+We can visualize this null distribution with the following code:
+
+```{r}
+ggplot(data = null_dist, aes(x = stat)) +
+  geom_histogram()
+
+```
+
+
+Now that the test is initialized and the null distribution formed, we can visualise to see how many of these null permutations have a difference of at least `obs_stat` of `r obs_diff %>% pull() %>% round(2)`?
+
+We can also calculate the p-value for our hypothesis test using the function `infer::get_p_value()`.
+
+```{r}
+
+null_dist %>% visualize() +
+  shade_p_value(obs_stat = obs_diff, direction = "two-sided")
+
+```
+
+```{r}
+null_dist %>%
+  get_p_value(obs_stat = obs_diff, direction = "two_sided")
+
+```
+
+The results shows a p value of 0, we can reject the null hypothesis. P value usually varies between 0 and 1, with a p value less than 0.05. In this case it is 0, so there is 0% probability the null is correct. The p value is statistically significant.
