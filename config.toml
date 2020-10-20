@@ -49,7 +49,7 @@ disqusShortname = ""
 
     [[params.navigation.links]]
       name = "Biography"
-      url = "blogs/session6-workshop3/blog12"
+      url = "blogs/new/blog12"
 
     #[[params.navigation.links]]
       #name = "#"
@@ -91,37 +91,37 @@ disqusShortname = ""
       title = "Biography"
       subtitle = "A bit more about me"
       image = "pic11.jpg"
-      url = "blogs/session6-workshop3/blog12"
+      url = "blogs/new/blog12"
       
     [[params.tiles.showcase]]
       title = "Global Warming"
       subtitle = "Temperature Anomalies"
       image = "pic12.jpg"
-      url = "blogs/session6-workshop3/blog11"
+      url = "blogs/new/blog11"
 
     [[params.tiles.showcase]]
       title = "Drinks and Hometown"
       subtitle = "You are what you drink!"
       image = "pic13.jpg"
-      url = "blogs/session6-workshop3/blog10"
+      url = "blogs/new/blog10"
 
     [[params.tiles.showcase]]
       title = "Recessions and Rates"
       subtitle = "Upward or Downward?"
       image = "pic14.jpg"
-      url = "blogs/session6-workshop3/blog9"
+      url = "blogs/new/blog9"
 
     [[params.tiles.showcase]]
       title = "Youth Risk Behavior Surveillance"
       subtitle = "Keeping an Eye on Teens Health!"
       image = "pic04.jpg"
-      url = "blogs/session6-workshop3/blog6"
+      url = "blogs/new/blog6"
 
     [[params.tiles.showcase]]
       title = "Pay Discrimination"
       subtitle = "In Omega Plc"
       image = "pic15.jpg"
-      url = "blogs/session6-workshop3/blog8"
+      url = "blogs/new/blog8"
     # You can make more showcases by copy and pasting the code above
 
   [params.blog]
@@ -196,7 +196,7 @@ disqusShortname = ""
       url= "https://www.linkedin.com/in/toniliang/"
       label = "LinkedIn"
 
-    [[params.footer.quicklinks]]
-      text = "Design: "
-      url= "https://www.html5up.net"
-      alt = "HTML5 UP"
+   # [[params.footer.quicklinks]]
+    #  text = "Design: "
+     # url= "https://www.html5up.net"
+    #  alt = "HTML5 UP"

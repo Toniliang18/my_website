@@ -147,7 +147,7 @@ yield_curve %&gt;%
   theme_bw()+
   theme(legend.position = &quot;none&quot;)+
   labs(title=&quot;Yield on U.S. Treasury rates since 1960&quot;, x=&quot;&quot;, y=&quot;%&quot;)</code></pre>
-<p><img src="/blogs/session6-workshop3/blog9_files/figure-html/unnamed-chunk-1-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/new/blog9_files/figure-html/unnamed-chunk-1-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>Based on the graphs, we can assume that the yields for the US treasury bills with different maturities are very similar since 1960.</p>
 </div>
 <div id="monthly-yields-on-us-rates-by-duration-since-1999-on-a-year-by-year-basis" class="section level3">
@@ -163,7 +163,7 @@ ggplot(year, aes(x=maturity, y=price))+
   theme_bw()+
   theme(legend.position = &quot;none&quot;)+
   labs(title=&quot;U.S. Yield Curve&quot;, x=&quot;Maturity&quot;, y=&quot;Yield (%)&quot;)</code></pre>
-<p><img src="/blogs/session6-workshop3/blog9_files/figure-html/unnamed-chunk-2-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/new/blog9_files/figure-html/unnamed-chunk-2-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>Based on these graphs, we can observe that the yields have decreased a lot since 1999.</p>
 </div>
 <div id="month-and-10-year-yields-since-1999" class="section level3">
@@ -179,7 +179,7 @@ ggplot(year_v2, aes(x=date, y=price))+
   theme_bw()+
   theme(legend.position = &quot;right&quot;, legend.title = element_blank())+
   labs(title=&quot;Yields on 3-month and 10-year US Treasury rates since 1999&quot;, x=&quot;&quot;, y=&quot;%&quot;)</code></pre>
-<p><img src="/blogs/session6-workshop3/blog9_files/figure-html/unnamed-chunk-3-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/new/blog9_files/figure-html/unnamed-chunk-3-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>Based on the graph, we can observe that the yield for the 3-month treasury bill reached very low levels between 2000-2005 and 2008-2015. The 10-Year treasury bill seems to be more resilient compared to the 3-month treasury bill.</p>
 <p>Now, we are trying to see whether the yield curve seem to flatten before the recessions since 1999.</p>
 <pre class="r"><code># get US recession dates after 1946 from Wikipedia 
@@ -261,7 +261,7 @@ ggplot(data, aes(x=date, y=diff), fill=&quot;blue&quot;)+
         axis.title = element_text(size=8), 
         plot.title = element_text(size=10,face=&quot;bold&quot;), 
         plot.subtitle = element_text(size=6))</code></pre>
-<p><img src="/blogs/session6-workshop3/blog9_files/figure-html/unnamed-chunk-4-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/new/blog9_files/figure-html/unnamed-chunk-4-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>Based on the analysis, we can see that the spread in yield between the 10-year and 3-year treasury turns negative before the economic crisis. It could be a indicator to predict future recession.</p>
 </div>
 </div>

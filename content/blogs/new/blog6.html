@@ -286,7 +286,7 @@ glimpse(yrbss)</code></pre>
   facet_grid(race~gender)+
   labs(title=&quot;Distribution of weights by kg within high school students&quot;, x=&quot;Weight (Kg)&quot;, y=&quot;Students (n)&quot;)+
   theme_bw()</code></pre>
-<p><img src="/blogs/session6-workshop3/blog6_files/figure-html/eda_on_weight-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/new/blog6_files/figure-html/eda_on_weight-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>Based on the table, we are missing 1004 values.</p>
 <p>The distribution of weight between male and female is very similar for each category.The majority of all students have a weight range between 50 and 75kg.It also worth noticing that the number of “White” students is much higher than any other category.</p>
 <p>Next, we consider the possible relationship between a high schooler’s weight and their physical activity.</p>
@@ -302,7 +302,7 @@ Weight_Activity_Relation %&gt;%
   geom_smooth() +
   labs(title =&quot;Relationship between workout and average weight&quot;,subtitle = &quot;9th-12th grade students&quot;,   x= &quot;Number of days physically active per week&quot;, y=&quot;Average Weight&quot;)+
   theme_bw()</code></pre>
-<p><img src="/blogs/session6-workshop3/blog6_files/figure-html/unnamed-chunk-3-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/new/blog6_files/figure-html/unnamed-chunk-3-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>There is definitely a relationship between the average weight and the number of workout days (per week) for the 9th-12th grade students. The graph shows that the weight (kg) tends to increase with the number of days physically active. The curve increases between 0 and 4 days of workout, showing a strong correlation between the 2 variables, and it slightly decreases between 4 and 5 days, but the increase pursues after day 6.</p>
 <pre class="r"><code>yrbss &lt;- yrbss %&gt;% 
   mutate(physical_3plus = ifelse(physically_active_7d &gt;= 3, &quot;yes&quot;, &quot;no&quot;))
@@ -342,7 +342,7 @@ prop.test(sum(Not_active),sum(Total_Count ))</code></pre>
         geom_boxplot()+
         labs(title=&quot;Activity vs Weight&quot;,
              x=&quot;Active more than 3 days per week&quot;, y=&quot;Weight&quot;)</code></pre>
-<p><img src="/blogs/session6-workshop3/blog6_files/figure-html/boxplot-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/new/blog6_files/figure-html/boxplot-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>The graph shows 2 sets of population: people who are not active more than 3 days per week (“no”) and people who are active more than 3 days per week (“yes”). Comparing the 2 sets, we can assume that the characteristics are very similar with slight differences. The median, the 25th percentile and 75th percentile of “yes” population are higher than “no” population. The similarities for the 2 sets question the relationship between weight and activity. We would have expected “yes” population to have the median, the 25th percentile and 75th percentile much higher than “no” population.</p>
 </div>
 <div id="confidence-interval" class="section level2">
@@ -396,10 +396,10 @@ prop.test(sum(Not_active),sum(Total_Count ))</code></pre>
   calculate(stat = &quot;diff in means&quot;, order = c(&quot;yes&quot;, &quot;no&quot;))</code></pre>
 <pre class="r"><code>ggplot(data = null_dist, aes(x = stat)) +
   geom_histogram()</code></pre>
-<p><img src="/blogs/session6-workshop3/blog6_files/figure-html/unnamed-chunk-9-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/new/blog6_files/figure-html/unnamed-chunk-9-1.png" width="648" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>null_dist %&gt;% visualize() +
   shade_p_value(obs_stat = obs_diff, direction = &quot;two-sided&quot;)</code></pre>
-<p><img src="/blogs/session6-workshop3/blog6_files/figure-html/unnamed-chunk-10-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/new/blog6_files/figure-html/unnamed-chunk-10-1.png" width="648" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>null_dist %&gt;%
   get_p_value(obs_stat = obs_diff, direction = &quot;two_sided&quot;)</code></pre>
 <pre><code>## # A tibble: 1 x 1

@@ -146,7 +146,7 @@ test_data %&gt;%
   theme_bw()+
   geom_smooth()+
   labs(title=&quot;Relationship between salary and experience&quot;, x=&quot;Experience&quot;, y=&quot;Salary&quot;)</code></pre>
-<p><img src="/blogs/session6-workshop3/blog8_files/figure-html/salary_exp_scatter-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/new/blog8_files/figure-html/salary_exp_scatter-1.png" width="648" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>ggplot(omega,aes(x=experience, y=salary, color=factor(gender)))+
   geom_point()+
   theme_bw()+
@@ -154,7 +154,7 @@ test_data %&gt;%
   facet_wrap(~gender)+
   theme(legend.position =&quot;null&quot;)+
   labs(title=&quot;Relationship between salary and experience&quot;, x=&quot;Experience&quot;, y=&quot;Salary&quot;)</code></pre>
-<p><img src="/blogs/session6-workshop3/blog8_files/figure-html/salary_exp_scatter-2.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/new/blog8_files/figure-html/salary_exp_scatter-2.png" width="648" style="display: block; margin: auto;" /></p>
 <p>The first graph shows that experience and salary are 2 correlated variables. However, the second graph show a clear difference in the level of salary between men and women for the same amount of experience.</p>
 </div>
 <div id="check-correlations-between-the-data" class="section level2">
@@ -163,7 +163,7 @@ test_data %&gt;%
   select(gender, experience, salary) %&gt;% #order variables they will appear in ggpairs()
   ggpairs(aes(colour=gender, alpha = 0.3))+
   theme_bw()</code></pre>
-<p><img src="/blogs/session6-workshop3/blog8_files/figure-html/ggpairs-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/new/blog8_files/figure-html/ggpairs-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>The results show a difference between male and female executives in term of experience and salary, with a larger sample for women than men. Overall, women earn less for the same amount of experience compared to men. It also interesting to notice that the correlation between experience and salary is different for men and women. The correlation is higher for female, it indicates a higher predictive relationship between the 2 variables.</p>
 </div>
 </div>
