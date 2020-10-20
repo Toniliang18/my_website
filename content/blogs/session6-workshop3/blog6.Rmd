@@ -47,7 +47,7 @@ library(tidyquant)
 ```
 
 
-# Youth Risk Behavior Surveillance
+# Keeping an eye on teens' health!
 
 Every two years, the Centers for Disease Control and Prevention conduct the [Youth Risk Behavior Surveillance System (YRBSS)](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm) survey, where it takes data from high schoolers (9th through 12th grade), to analyze health patterns. 
 
@@ -84,7 +84,7 @@ Based on the table, we are missing 1004 values.
 The distribution of weight between male and female is very similar for each category.The majority of all students have a weight range between 50 and 75kg.It also worth noticing that the number of "White" students is much higher than any other category.
 
 
-Next, we consider the possible relationship between a high schooler’s weight and their physical activity. Plotting the data is a useful first step because it helps us quickly visualize trends, identify strong associations, and develop research questions.
+Next, we consider the possible relationship between a high schooler’s weight and their physical activity. 
 
 ```{r}
 
@@ -105,8 +105,6 @@ Weight_Activity_Relation %>%
 
 There is definitely a relationship between the average weight and the number of workout days (per week) for the 9th-12th grade students. The graph shows that the weight (kg) tends to increase with the number of days physically active. The curve increases between 0 and 4 days of workout, showing a strong correlation between the 2 variables, and it slightly decreases between 4 and 5 days, but the increase pursues after day 6.
 
-
-Let’s create a new variable `physical_3plus`, which will be `yes` if they are physically active for at least 3 days a week, and `no` otherwise.
 
   
 ```{r}
@@ -148,7 +146,7 @@ The graph shows 2 sets of population: people who are not active more than 3 days
 
 ## Confidence Interval
 
-Boxplots show how the medians of the two distributions compare, but we can also compare the means of the distributions using either a confidence interval or a hypothesis test. Note that when we calculate the mean/SD, etc weight in these groups using the mean function, we must ignore any missing values by setting the `na.rm = TRUE`.
+Boxplots show how the medians of the two distributions compare, but we can also compare the means of the distributions using either a confidence interval or a hypothesis test. 
 
 
 ```{r}
@@ -171,7 +169,7 @@ There is an observed difference of about 1.77kg (68.44 - 66.67), and we notice t
 
 ## Hypothesis test with formula
 
-Write the null and alternative hypotheses for testing whether mean weights are different for those who exercise at least times a week and those who don’t.
+The null and alternative hypotheses for testing whether mean weights are different for those who exercise at least times a week and those who don’t.
 
 ```{r}
 t.test(weight ~ physical_3plus, data = yrbss)
@@ -182,9 +180,6 @@ t.test(weight ~ physical_3plus, data = yrbss)
 ## Hypothesis test with `infer`
 
 
-Next, we will introduce a new function, `hypothesize`, that falls into the infer workflow. we will use this method for conducting hypothesis tests.
-
-But first, we need to initialize the test, which we will save as `obs_diff`.
 
 ```{r}
 obs_diff <- yrbss %>%
@@ -192,8 +187,6 @@ obs_diff <- yrbss %>%
   calculate(stat = "diff in means", order = c("yes", "no"))
 
 ```
-
-After we have initialized the test, we need to simulate the test on the null distribution, which we will save as null.
 
 
 ```{r}
@@ -205,22 +198,11 @@ null_dist <- yrbss %>%
 
 ```
 
-Here, `hypothesize` is used to set the null hypothesis as a test for independence, i.e., that there is no difference between the two population means. In one sample cases, the null argument can be set to *point* to test a hypothesis relative to a point estimate. 
-
-Also, note that the `type` argument within generate is set to permute, which is the argument when generating a null distribution for a hypothesis test.
-
-We can visualize this null distribution with the following code:
-
 ```{r}
 ggplot(data = null_dist, aes(x = stat)) +
   geom_histogram()
 
 ```
-
-
-Now that the test is initialized and the null distribution formed, we can visualise to see how many of these null permutations have a difference of at least `obs_stat` of `r obs_diff %>% pull() %>% round(2)`?
-
-We can also calculate the p-value for our hypothesis test using the function `infer::get_p_value()`.
 
 ```{r}
 

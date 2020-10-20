@@ -1,7 +1,7 @@
 ---
 title: "Youth Risk Behavior Surveillance"
 author: "LBS MFA2021 Group 2A"
-date: "2020-10-19"
+date: "2020-10-20"
 output:
   html_document:
     theme: flatly
@@ -14,8 +14,8 @@ output:
 
 
 
-<div id="youth-risk-behavior-surveillance" class="section level1">
-<h1>Youth Risk Behavior Surveillance</h1>
+<div id="keeping-an-eye-on-teens-health" class="section level1">
+<h1>Keeping an eye on teens’ health!</h1>
 <p>Every two years, the Centers for Disease Control and Prevention conduct the <a href="https://www.cdc.gov/healthyyouth/data/yrbs/index.htm">Youth Risk Behavior Surveillance System (YRBSS)</a> survey, where it takes data from high schoolers (9th through 12th grade), to analyze health patterns.</p>
 <pre class="r"><code>data(yrbss)
 glimpse(yrbss)</code></pre>
@@ -289,7 +289,7 @@ glimpse(yrbss)</code></pre>
 <p><img src="/blogs/session6-workshop3/blog6_files/figure-html/eda_on_weight-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>Based on the table, we are missing 1004 values.</p>
 <p>The distribution of weight between male and female is very similar for each category.The majority of all students have a weight range between 50 and 75kg.It also worth noticing that the number of “White” students is much higher than any other category.</p>
-<p>Next, we consider the possible relationship between a high schooler’s weight and their physical activity. Plotting the data is a useful first step because it helps us quickly visualize trends, identify strong associations, and develop research questions.</p>
+<p>Next, we consider the possible relationship between a high schooler’s weight and their physical activity.</p>
 <pre class="r"><code>Weight_Activity_Relation&lt;- yrbss %&gt;%
   select(weight,physically_active_7d) %&gt;%
   group_by(physically_active_7d) %&gt;%
@@ -304,7 +304,6 @@ Weight_Activity_Relation %&gt;%
   theme_bw()</code></pre>
 <p><img src="/blogs/session6-workshop3/blog6_files/figure-html/unnamed-chunk-3-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>There is definitely a relationship between the average weight and the number of workout days (per week) for the 9th-12th grade students. The graph shows that the weight (kg) tends to increase with the number of days physically active. The curve increases between 0 and 4 days of workout, showing a strong correlation between the 2 variables, and it slightly decreases between 4 and 5 days, but the increase pursues after day 6.</p>
-<p>Let’s create a new variable <code>physical_3plus</code>, which will be <code>yes</code> if they are physically active for at least 3 days a week, and <code>no</code> otherwise.</p>
 <pre class="r"><code>yrbss &lt;- yrbss %&gt;% 
   mutate(physical_3plus = ifelse(physically_active_7d &gt;= 3, &quot;yes&quot;, &quot;no&quot;))
 
@@ -348,7 +347,7 @@ prop.test(sum(Not_active),sum(Total_Count ))</code></pre>
 </div>
 <div id="confidence-interval" class="section level2">
 <h2>Confidence Interval</h2>
-<p>Boxplots show how the medians of the two distributions compare, but we can also compare the means of the distributions using either a confidence interval or a hypothesis test. Note that when we calculate the mean/SD, etc weight in these groups using the mean function, we must ignore any missing values by setting the <code>na.rm = TRUE</code>.</p>
+<p>Boxplots show how the medians of the two distributions compare, but we can also compare the means of the distributions using either a confidence interval or a hypothesis test.</p>
 <pre class="r"><code>yrbss %&gt;%
   group_by(physical_3plus) %&gt;%
   filter(!is.na(physical_3plus)) %&gt;% 
@@ -371,7 +370,7 @@ prop.test(sum(Not_active),sum(Total_Count ))</code></pre>
 </div>
 <div id="hypothesis-test-with-formula" class="section level2">
 <h2>Hypothesis test with formula</h2>
-<p>Write the null and alternative hypotheses for testing whether mean weights are different for those who exercise at least times a week and those who don’t.</p>
+<p>The null and alternative hypotheses for testing whether mean weights are different for those who exercise at least times a week and those who don’t.</p>
 <pre class="r"><code>t.test(weight ~ physical_3plus, data = yrbss)</code></pre>
 <pre><code>## 
 ##  Welch Two Sample t-test
@@ -387,25 +386,17 @@ prop.test(sum(Not_active),sum(Total_Count ))</code></pre>
 </div>
 <div id="hypothesis-test-with-infer" class="section level2">
 <h2>Hypothesis test with <code>infer</code></h2>
-<p>Next, we will introduce a new function, <code>hypothesize</code>, that falls into the infer workflow. we will use this method for conducting hypothesis tests.</p>
-<p>But first, we need to initialize the test, which we will save as <code>obs_diff</code>.</p>
 <pre class="r"><code>obs_diff &lt;- yrbss %&gt;%
   specify(weight ~ physical_3plus) %&gt;%
   calculate(stat = &quot;diff in means&quot;, order = c(&quot;yes&quot;, &quot;no&quot;))</code></pre>
-<p>After we have initialized the test, we need to simulate the test on the null distribution, which we will save as null.</p>
 <pre class="r"><code>null_dist &lt;- yrbss %&gt;%
   specify(weight ~ physical_3plus) %&gt;%
   hypothesize(null = &quot;independence&quot;) %&gt;%
   generate(reps = 1000, type = &quot;permute&quot;) %&gt;%
   calculate(stat = &quot;diff in means&quot;, order = c(&quot;yes&quot;, &quot;no&quot;))</code></pre>
-<p>Here, <code>hypothesize</code> is used to set the null hypothesis as a test for independence, i.e., that there is no difference between the two population means. In one sample cases, the null argument can be set to <em>point</em> to test a hypothesis relative to a point estimate.</p>
-<p>Also, note that the <code>type</code> argument within generate is set to permute, which is the argument when generating a null distribution for a hypothesis test.</p>
-<p>We can visualize this null distribution with the following code:</p>
 <pre class="r"><code>ggplot(data = null_dist, aes(x = stat)) +
   geom_histogram()</code></pre>
 <p><img src="/blogs/session6-workshop3/blog6_files/figure-html/unnamed-chunk-9-1.png" width="648" style="display: block; margin: auto;" /></p>
-<p>Now that the test is initialized and the null distribution formed, we can visualise to see how many of these null permutations have a difference of at least <code>obs_stat</code> of 1.77?</p>
-<p>We can also calculate the p-value for our hypothesis test using the function <code>infer::get_p_value()</code>.</p>
 <pre class="r"><code>null_dist %&gt;% visualize() +
   shade_p_value(obs_stat = obs_diff, direction = &quot;two-sided&quot;)</code></pre>
 <p><img src="/blogs/session6-workshop3/blog6_files/figure-html/unnamed-chunk-10-1.png" width="648" style="display: block; margin: auto;" /></p>

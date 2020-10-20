@@ -1,7 +1,7 @@
 # Site settings
 baseURL = "https://toniliang.netlify.app/"
 languageCode = "en-us"
-title = "Toni's Portfolio Website"
+title = "Toni's Home Site"
 theme = "forty"
 
 # Enter your tracking code to enable Google Analytics
@@ -44,7 +44,7 @@ disqusShortname = ""
     # logo = "logo.png"
 
     [[params.navigation.links]]
-      name = "My Project"
+      name = "Home"
       url = "https://toniliang.netlify.app/"
 
     [[params.navigation.links]]
@@ -63,9 +63,9 @@ disqusShortname = ""
     #    url = "UrlOfLink"
 
     # Button Style 1
-    [[params.navigation.button1]]
-      name = "Get Started"
-      url = "https://toniliang.netlify.app/"
+    #[[params.navigation.button1]]
+     # name = "Get Started"
+      #url = "https://toniliang.netlify.app/"
 
     # Button Style 2
    # [[params.navigation.button2]]
@@ -96,19 +96,19 @@ disqusShortname = ""
     [[params.tiles.showcase]]
       title = "Global Warming"
       subtitle = "Temperature Anomalies"
-      image = "pic01.jpg"
+      image = "pic12.jpg"
       url = "blogs/session6-workshop3/blog11"
 
     [[params.tiles.showcase]]
       title = "Drinks and Hometown"
       subtitle = "You are what you drink!"
-      image = "pic02.jpg"
+      image = "pic13.jpg"
       url = "blogs/session6-workshop3/blog10"
 
     [[params.tiles.showcase]]
-      title = "Recession and the Rates"
+      title = "Recessions and Rates"
       subtitle = "Upward or Downward?"
-      image = "pic03.jpg"
+      image = "pic14.jpg"
       url = "blogs/session6-workshop3/blog9"
 
     [[params.tiles.showcase]]
@@ -119,8 +119,8 @@ disqusShortname = ""
 
     [[params.tiles.showcase]]
       title = "Pay Discrimination"
-     # subtitle = "Feugiat Amet Tempus"
-      image = "pic06.jpg"
+      subtitle = "In Omega Plc"
+      image = "pic15.jpg"
       url = "blogs/session6-workshop3/blog8"
     # You can make more showcases by copy and pasting the code above
 

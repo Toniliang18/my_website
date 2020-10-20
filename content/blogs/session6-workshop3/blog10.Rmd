@@ -54,10 +54,9 @@ library(lubridate) #to handle dates
 
 
 
-# Where you from & What you drink
+# You are what you drink...?
 
-Back in 2014, [fivethiryeight.com](https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/) published an article on alchohol consumption in different countries. The data `drinks` is available as part of the `fivethirtyeight` package. Make sure you have installed the `fivethirtyeight` package before proceeding.
-
+Back in 2014, [fivethiryeight.com](https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/) published an article on alchohol consumption in different countries. 
 
 ```{r, load_alcohol_data}
 library(fivethirtyeight)
@@ -89,7 +88,7 @@ drinks %>%
 ```
 The graph shows, that surprisingly Namibia, the Czech Republic and Gabon are on the first three positions in the ranking, even outperforming Germany. While this might be due to several other reasons, Namibia as a former German colony could have simply adapted to some of the Northern European habits. Besides, the country is known for a large own beer producing industry. Next, we want to examine the wine consumption in the top countries.
 
-Make a plot that shows the top 25 wine consuming countries
+A plot showing the top 25 wine consuming countries
 
 ```{r wine_plot}
 drinks %>% 
@@ -97,9 +96,10 @@ drinks %>%
   head(25) %>% 
   ggplot(aes(x=wine_servings, y=reorder(country,wine_servings)))+geom_col()+geom_text(aes(label = wine_servings),vjust=0.1, hjust=-0.1, color="Black")+labs(title="Top 25 Wine Consuming Countries", subtitle = "Data Since 2010", x="Number Of Servings", y="")+theme_bw()
 ```
+
 As we can see, France is by far the leading country in global wine consumption. While this isn’t a big surprise, the viewers attention is specifically caught by the ranks two and three - Portugal and Andorra to be precise. Those two countries might specifically benefit from the mild and mostly warm climate in the region. Portugal is mostly known for famous Port wines, that are produced across the hills of the Douro Valley - a region in the north-east of the country. Lastly, we want to have a look at the spirit consumption rates by country.
 
-Finally, make a plot that shows the top 25 spirit consuming countries
+Finally, we are plotting the top 25 spirit consuming countries.
 ```{r spirit_plot}
 drinks %>% 
   arrange(-spirit_servings) %>% 
@@ -109,7 +109,7 @@ drinks %>%
 
 As seen in the graph, Grenada is by far the leader in global spirit consumption. While this might be the effect of an accelerating tourism in the region, this could also be due to very low hurdles and lack of consumption restrictions in the country. Besides, as potentially also in the case of Belarus, the consumption of “hard” liquors is perceived as a rather less worse habit which could be the result of special advertising strategies by global companies and local distributors. Given the size of the country though, this result is rather shocking and should be tackled by local authorities to avoid a further negative development in the future.
 
-What can you infer from these plots? Don't just explain what's in the graph, but speculate or tell a short story (1-2 paragraphs max).
 
-We can clearly see that countries with a strong tradition and production history regarding a specific alcohol will also be large consumers of it. For instance this evidently occurs in France and Russia where wine and spirit are respectively very common. Moreover, what suprised us was seeing Italy only as the 9th consumer in the world of wine despite being the second producer overall. France, instead, being the first producer was also the first consumer of wine worldwide, something largely expected from our assumptions. 
+
+In general, we can clearly see that countries with a strong tradition and production history regarding a specific alcohol will also be large consumers of it. For instance this evidently occurs in France and Russia where wine and spirit are respectively very common. Moreover, what suprised us was seeing Italy only as the 9th consumer in the world of wine despite being the second producer overall. France, instead, being the first producer was also the first consumer of wine worldwide, something largely expected from our assumptions. 
 
